@@ -6,7 +6,10 @@ import org.carmanager.veiculo.repository.Veiculo;
 import org.carmanager.veiculo.service.VeiculoService;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.UriInfo;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -34,13 +37,6 @@ public class VeiculoController {
         }
     }
 
-    @GET
-    @Path("/find/{param}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Veiculo>  getVeiculoByParam(@PathParam("param") String param)
-    {
-        return service.getfindVeiculo(param);
-    }
 
     @GET
     @Path("/{id}")
@@ -105,4 +101,20 @@ public class VeiculoController {
 
     }
 
+   /* @GET
+    @Path("/find/{param}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Veiculo>  getVeiculoByParam(@PathParam("param") String param)
+    {
+        return service.getfindVeiculo(param);
+    }*/
+
+    @GET
+    @Path("/find/{param}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Veiculo>  getVeiculoByParam(@Context UriInfo uriInfo)
+    {
+        MultivaluedMap<String, String> queryParams = uriInfo.getQueryParameters();
+        return null;//service.getfindVeiculo(param);
+    }
 }

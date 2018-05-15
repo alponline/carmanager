@@ -71,13 +71,13 @@ public class VeiculoRepository {
     }
 
     public void update(Veiculo veiculo) throws SQLException {
-        String sql ="UPDATE TB_VEICULO SET veiculo = ? ,descricao = ?,vendido = ?,created = ?,updated = ? where id = ?";
+        String sql ="UPDATE TB_VEICULO SET veiculo = ? , marca = ?, ano = ?, descricao = ?, vendido = ?,created = ?,updated = ? where id = ?";
         final PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1,veiculo.getVeiculo());
         ps.setString(2,veiculo.getMarca());
         ps.setInt(   3,veiculo.getAno());
-        ps.setString(5,veiculo.getDescricao());
-        ps.setBoolean(4,veiculo.getVendido());
+        ps.setString(4,veiculo.getDescricao());
+        ps.setBoolean(5,veiculo.getVendido());
         ps.setDate(6, (Date) veiculo.getCreated());
         ps.setDate(7, (Date) veiculo.getUpdated());
         ps.setInt(8,veiculo.getId());

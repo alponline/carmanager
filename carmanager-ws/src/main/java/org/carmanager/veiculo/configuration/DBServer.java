@@ -53,12 +53,40 @@ public class DBServer {
                 createHSQLDBConnection();
                 dropTables();
                 createTables();
+                buidRows();
                 this.initialized = true;
             }
         } catch (Exception e) {
             shutDownDBServer();
             throw e;
         }
+    }
+
+    private void insertRows(String sql) throws SQLException {
+        /*String sql = "INSERT INTO TB_VEICULO " +
+                "(veiculo, marca, ano, descricao, vendido, created, updated) values " +
+                "('Uno','FIAT',1999,'teste de cadastro',false,'2014-02-20 00:00:00','2014-02-20 00:00:00')";*/
+        Statement st = null;
+        try {
+            st = connection.createStatement();
+            st.executeUpdate(sql);
+            connection.commit();
+        }finally {
+            if (st!=null)
+                st.close();
+        }
+    }
+
+    private void buidRows() throws SQLException {
+        insertRows("INSERT INTO TB_VEICULO " +
+                "(veiculo, marca, ano, descricao, vendido, created, updated) " +
+                "values ('MOBI','FIAT',2018,'1.0 MSI TOTALFLEX',false,'2018-05-10 00:00:00','2018-05-10 00:00:00')");
+        insertRows("INSERT INTO TB_VEICULO " +
+                "(veiculo, marca, ano, descricao, vendido, created, updated) " +
+                "values ('Fiesta','FORD',2011,'1.0 TOTALFLEX',false,'2014-02-20 00:00:00','2014-02-20 00:00:00')");
+        insertRows("INSERT INTO TB_VEICULO " +
+                "(veiculo, marca, ano, descricao, vendido, created, updated) " +
+                "values ('Gol','Wolkswagen',2017,'1.6 MSI TOTALFLEX TRENDLINE 4P MANUAL 2016/2017',false,'2014-02-20 00:00:00','2014-02-20 00:00:00')");
     }
 
     private void dropTables() throws SQLException {
